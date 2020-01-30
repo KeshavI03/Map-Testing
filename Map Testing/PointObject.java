@@ -11,7 +11,7 @@ public class PointObject {
 	}
 	
 	public int length() {
-		return p.length;
+		return num;
 	}
 	
 	public void setLink(PointObject l) {

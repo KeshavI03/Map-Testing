@@ -14,7 +14,7 @@ public class tester {
 		Map m = new Map();
 		
 		JFrame frame = new JFrame("Map"); 
-		frame.setSize(WINDOW_HEIGHT, WINDOW_WIDTH);
+		frame.setSize(WINDOW_WIDTH + 15, WINDOW_HEIGHT + 40);
 		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
