@@ -10,6 +10,10 @@ public class PointObject {
 		p = new Point[length];
 	}
 	
+	public int length() {
+		return p.length;
+	}
+	
 	public void setLink(PointObject l) {
 		link = l;
 	}
@@ -40,7 +44,7 @@ public class PointObject {
 		if(num >= p.length)
 			System.out.println("Adding more points than declared");
 		else {
-			p[num].setPoint(x, y);
+			p[num] = new Point(x, y);
 			num++;
 		}
 			
