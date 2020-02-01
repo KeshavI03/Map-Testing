@@ -5,6 +5,7 @@ public class PointObject {
 	protected Point p[];
 	private int num = 0;
 	private PointObject link;
+	protected int drawWidth = 1;
 	
 	public PointObject(int length) {
 		p = new Point[length];
@@ -12,6 +13,14 @@ public class PointObject {
 	
 	public int length() {
 		return num;
+	}
+	
+	public void setLineWidth(int width) {
+		drawWidth = width;
+	}
+	
+	public int getWidth() {
+		return drawWidth;
 	}
 	
 	public void setLink(PointObject l) {

@@ -1,35 +1,49 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Map {
 	
-	PointObject[] obj = new PointObject[3];
+	PointObject[] obj;
 	
-	protected double scale = 10;
-	protected Point centerLocation = new Point(0,0);
+	protected int numObjDec = 0;
 	
-	protected int polygonPXLength = 3;
-	protected int linePXLength = 2;
-	protected int locationRadLength = 5;
+	protected double scale = 500;
+	protected Point centLoc = new Point(200,200);
 	
-	public Map() {
+	public Map(int size) throws FileNotFoundException {
 		
-		obj[0] = new Polygon(30);
+		obj = new PointObject[size];
+		loadMap("indiana", "Polygon", 3);
+		loadMap("point", "Location", 1);
+
+	}
+	
+	public void loadMap(String path, String type, int drawWidth) throws FileNotFoundException {
+		Scanner vectorIn = new Scanner(new File("src\\Vec Files\\" + path + ".txt"));
+		String temp;
 		
-		obj[0].addPoint(0,0);
-		obj[0].addPoint(10,10);
-		obj[0].addPoint(-10,10);
-		obj[0].addPoint(-10,-10);
-//		obj[0].addPoint(1,1);
-//		obj[0].addPoint(1,2);
-//		obj[0].addPoint(0,1);
-		
-		//obj[1] = new Line(3);
-		
-		//obj[1].addPoint(2,3);
-		//obj[1].addPoint(5,3);
-		//obj[1].addPoint(7,4);
-		
-		//obj[2] = new Location(2,4);
+		if(type.equals("Polygon")) {
+			obj[numObjDec] = new Polygon(267);
+		}
+		else if(type.equals("Line")) {
+			obj[numObjDec] = new Line(267);
+		}
+		else {
+			temp = vectorIn.nextLine();
+			obj[numObjDec] = new Location(Double.parseDouble(temp.split(",", 2)[0]),Double.parseDouble(temp.split(",", 2)[1]));
+			obj[numObjDec].setLineWidth(drawWidth); 
+			vectorIn.close();
+			return;
+		}
+		obj[numObjDec].setLineWidth(drawWidth);
+		while(vectorIn.hasNext()) {
+			temp = vectorIn.nextLine();
+			obj[numObjDec].addPoint(Double.parseDouble(temp.split(",", 2)[0]),Double.parseDouble(temp.split(",", 2)[1]));
+		}
+		vectorIn.close();
+		numObjDec++;
 	}
 	
 	public int length() {

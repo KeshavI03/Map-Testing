@@ -38,25 +38,27 @@ public class DrawPanel extends JPanel{
 		for(PointObject o: map.obj) {
 			
 			if(o instanceof Polygon) {
-				g2.setStroke(new BasicStroke(map.polygonPXLength));
+				g2.setStroke(new BasicStroke(o.getWidth()));
 				for(int j = 1; j < o.length(); j++) 
-					g2.drawLine((int)(o.getPoint(j).X() * xScale) + (width/2), (int)(o.getPoint(j).Y() * yScale) + (width/2),
-								(int)(o.getPoint(j-1).X() * xScale) + (width/2), (int)(o.getPoint(j-1).Y() * yScale) + (width/2));
+					g2.drawLine((int)(o.getPoint(j).X() * xScale) + (width/2) - (int)map.centLoc.X(), (int)(o.getPoint(j).Y() * yScale) + (width/2) - (int)map.centLoc.Y(),
+								(int)(o.getPoint(j-1).X() * xScale) + (width/2) - (int)map.centLoc.X(), (int)(o.getPoint(j-1).Y() * yScale) + (width/2) -  (int)map.centLoc.Y());
 				
-				g2.drawLine((int)(o.getPoint(0).X() * xScale) + (width/2), (int)(o.getPoint(0).Y() * yScale) + (width/2),
-						(int)(o.getPoint(o.length()-1).X() * xScale) + (width/2), (int)(o.getPoint(o.length()-1).Y() * yScale) + (width/2));
+				g2.drawLine((int)(o.getPoint(0).X() * xScale) + (width/2) - (int)map.centLoc.X(), (int)(o.getPoint(0).Y() * yScale) + (width/2) -  (int)map.centLoc.Y(),
+						(int)(o.getPoint(o.length()-1).X() * xScale) + (width/2) -  (int)map.centLoc.X(), (int)(o.getPoint(o.length()-1).Y() * yScale) + (width/2) -  (int)map.centLoc.Y());
 			}
 			
 			else if(o instanceof Line) {
-				g2.setStroke(new BasicStroke(map.linePXLength));
+				g2.setStroke(new BasicStroke(o.getWidth()));
 				for(int j = 1; j < o.length(); j++) 
-					g2.drawLine((int)(o.getPoint(j).X() * xScale) + (width/2), (int)(o.getPoint(j).Y() * yScale) + (width/2),
-								(int)(o.getPoint(j-1).X() * xScale) + (width/2), (int)(o.getPoint(j-1).Y() * yScale) + (width/2));
+					g2.drawLine((int)(o.getPoint(j).X() * xScale) + (width/2) -  (int)map.centLoc.X(), (int)(o.getPoint(j).Y() * yScale) + (width/2) -  (int)map.centLoc.Y(),
+								(int)(o.getPoint(j-1).X() * xScale) + (width/2) -  (int)map.centLoc.X(), (int)(o.getPoint(j-1).Y() * yScale) + (width/2) -  (int)map.centLoc.Y());
 			}
 			
 			else if(o instanceof Location) {
-				g2.drawOval((int)(o.getPoint(0).X() * xScale) + (width/2) - map.locationRadLength, (int)(o.getPoint(0).Y() * yScale) + (width/2) - map.locationRadLength,
-						map.locationRadLength * 2, map.locationRadLength * 2);
+				g2.setStroke(new BasicStroke(o.getWidth()));
+				g2.drawOval((int)(o.getPoint(0).X() * xScale) + (width/2) - o.getWidth() -  (int)map.centLoc.X(),
+						(int)(o.getPoint(0).Y() * yScale) + (width/2) - o.getWidth() -  (int)map.centLoc.Y(),
+						o.getWidth() * 2, o.getWidth() * 2);
 			}
 			
 		}
