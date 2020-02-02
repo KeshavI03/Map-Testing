@@ -6,6 +6,8 @@ public class PointObject {
 	private int num = 0;
 	private PointObject link;
 	protected int drawWidth = 1;
+	protected double xBias = 0;
+	protected double yBias = 0;
 	
 	public PointObject(int length) {
 		p = new Point[length];
@@ -17,6 +19,22 @@ public class PointObject {
 	
 	public void setLineWidth(int width) {
 		drawWidth = width;
+	}
+	
+	public void setXBias(double shift) {
+		xBias = shift;
+	}
+	
+	public void setYBias(double shift) {
+		yBias = shift;
+	}
+	
+	public double getXBias() {
+		return xBias;
+	}
+	
+	public double getYBias() {
+		return yBias;
 	}
 	
 	public int getWidth() {

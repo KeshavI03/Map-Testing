@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Map {
@@ -9,35 +8,49 @@ public class Map {
 	
 	protected int numObjDec = 0;
 	
-	protected double scale = 500;
-	protected Point centLoc = new Point(200,200);
+	protected double scale = 750;
+	protected Point centLoc = new Point(300,300);
 	
 	public Map(int size) throws FileNotFoundException {
 		
 		obj = new PointObject[size];
-		loadMap("indiana", "Polygon", 3);
-		loadMap("point", "Location", 1);
+		loadObject("indiana", "Polygon", -150 , 0, 1);
+		loadObject("ohio", "Polygon", 250 , -79, 1);
 
 	}
 	
-	public void loadMap(String path, String type, int drawWidth) throws FileNotFoundException {
+	public void loadObject(String path, String type, double xBias, double yBias, int drawWidth) throws FileNotFoundException {
+		Scanner scanNumLines = new Scanner(new File("src\\Vec Files\\" + path + ".txt"));
 		Scanner vectorIn = new Scanner(new File("src\\Vec Files\\" + path + ".txt"));
+		
+		int numLines = 0;
+		while(scanNumLines.hasNext()) {
+			scanNumLines.nextLine();
+			numLines++;
+		}
+		
+		scanNumLines.close();
+		
 		String temp;
 		
 		if(type.equals("Polygon")) {
-			obj[numObjDec] = new Polygon(267);
+			obj[numObjDec] = new Polygon(numLines);
 		}
 		else if(type.equals("Line")) {
-			obj[numObjDec] = new Line(267);
+			obj[numObjDec] = new Line(numLines);
 		}
 		else {
 			temp = vectorIn.nextLine();
 			obj[numObjDec] = new Location(Double.parseDouble(temp.split(",", 2)[0]),Double.parseDouble(temp.split(",", 2)[1]));
-			obj[numObjDec].setLineWidth(drawWidth); 
+			obj[numObjDec].setLineWidth(drawWidth);
+			obj[numObjDec].setXBias(xBias);
+			obj[numObjDec].setYBias(yBias);
 			vectorIn.close();
 			return;
 		}
 		obj[numObjDec].setLineWidth(drawWidth);
+		obj[numObjDec].setXBias(xBias);
+		obj[numObjDec].setYBias(yBias);
 		while(vectorIn.hasNext()) {
 			temp = vectorIn.nextLine();
 			obj[numObjDec].addPoint(Double.parseDouble(temp.split(",", 2)[0]),Double.parseDouble(temp.split(",", 2)[1]));
