@@ -8,14 +8,16 @@ public class Map {
 	
 	protected int numObjDec = 0;
 	
-	protected double scale = 750;
-	protected Point centLoc = new Point(300,300);
+	protected double scale = 2000;
+	protected Point centLoc = new Point(500,500);
 	
 	public Map(int size) throws FileNotFoundException {
 		
 		obj = new PointObject[size];
 		loadObject("indiana", "Polygon", -150 , 0, 1);
-		loadObject("ohio", "Polygon", 250 , -79, 1);
+		loadObject("ohio", "Polygon", 249 , -78, 1);
+		loadObject("pennsylvania", "Polygon", 873 , -229, 1);
+		loadObject("wvirginia", "Polygon", 249 , -78, 1);
 
 	}
 	

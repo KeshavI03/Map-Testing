@@ -19,7 +19,7 @@ public class tester {
 		frame.setBackground(Color.black);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		DrawPanel disp = new DrawPanel(WINDOW_HEIGHT, WINDOW_WIDTH);
+		DrawPanel disp = new DrawPanel(WINDOW_HEIGHT, WINDOW_WIDTH, false); 
 		disp.setMap(m);
 
 		frame.add(disp);
